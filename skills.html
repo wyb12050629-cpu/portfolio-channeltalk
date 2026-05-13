@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills — WANGYUBIN</title>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    :root {
+      --bg:#050505; --bg2:#080808;
+      --accent:#6D32FF; --electric:#00CCFF;
+      --white:#fff; --dim:#555; --dim2:#888;
+      --border:rgba(255,255,255,.06); --card:rgba(255,255,255,.02);
+      --font:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      --grad:linear-gradient(45deg,var(--accent),var(--electric));
+    }
+    *{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-weight:300}
+
+    nav{position:fixed;top:0;width:100%;height:60px;padding:0 6%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(5,5,5,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .logo{font-weight:200;font-size:.85rem;letter-spacing:6px;color:rgba(255,255,255,.9);text-decoration:none;text-transform:uppercase}
+    nav ul{display:flex;list-style:none;gap:2.5rem}
+    nav ul li a{text-decoration:none;color:var(--dim2);font-size:.7rem;font-weight:300;text-transform:uppercase;letter-spacing:2.5px;transition:color .3s}
+    nav ul li a:hover,nav ul li a.active{color:var(--white)}
+
+    .page-hero{padding:160px 6% 80px;border-bottom:1px solid var(--border)}
+    .ph-label{font-size:.6rem;font-weight:300;color:var(--dim2);text-transform:uppercase;letter-spacing:4px;margin-bottom:1.2rem}
+    .ph-title{font-size:clamp(2rem,5vw,4rem);font-weight:200;line-height:1.1;letter-spacing:-1px}
+    .ph-title .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+    .sec{padding:100px 6%}
+    .sec.dark{background:var(--bg2)}
+    .sec-label{font-size:.6rem;font-weight:300;color:var(--dim2);text-transform:uppercase;letter-spacing:4px;margin-bottom:1rem}
+    .sec-title{font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:200;line-height:1.4;margin-bottom:3.5rem;letter-spacing:-0.5px}
+    .sec-title .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+    /* SKILL GRID */
+    .skill-cats{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+    .s-group{margin-bottom:3rem}
+    .s-group-title{font-size:.6rem;font-weight:300;color:var(--dim2);text-transform:uppercase;letter-spacing:3px;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+    .s-group-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+    .chip-grid{display:flex;flex-wrap:wrap;gap:.5rem}
+    .chip{padding:.45rem 1rem;background:var(--card);border:1px solid var(--border);font-size:.75rem;font-weight:300;color:var(--dim2);transition:border-color .3s,color .3s}
+    .chip:hover{border-color:rgba(255,255,255,.2);color:var(--white)}
+    .chip.hi{border-color:rgba(109,50,255,.2);color:rgba(149,100,255,.85)}
+    .chip.sec{border-color:rgba(0,204,255,.2);color:rgba(0,204,255,.75)}
+
+    /* DOMAIN CARDS */
+    .domain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border)}
+    .d-card{background:var(--card);padding:2.5rem 2rem;transition:background .3s}
+    .d-card:hover{background:rgba(255,255,255,.04)}
+    .d-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;border:1px solid var(--border)}
+    .d-icon svg{width:18px;height:18px;stroke:rgba(109,50,255,.7);fill:none;stroke-width:1.5}
+    .d-title{font-size:.9rem;font-weight:400;margin-bottom:.6rem;color:rgba(255,255,255,.9)}
+    .d-desc{font-size:.78rem;font-weight:300;color:var(--dim2);line-height:1.9}
+    .d-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem}
+    .dtag{font-size:.62rem;font-weight:300;padding:2px 8px;border:1px solid var(--border);color:var(--dim2)}
+
+    /* CERT CARDS */
+    .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border)}
+    .cert-card{background:var(--card);padding:1.8rem;text-align:center;transition:background .3s}
+    .cert-card:hover{background:rgba(255,255,255,.04)}
+    .cert-name{font-size:.82rem;font-weight:400;margin-bottom:.4rem;color:rgba(255,255,255,.9)}
+    .cert-sub{font-size:.68rem;font-weight:300;color:var(--dim2)}
+
+    /* LANG */
+    .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border)}
+    .lang-card{background:var(--card);padding:2rem 1.8rem;display:flex;gap:1.2rem;align-items:center;transition:background .3s}
+    .lang-card:hover{background:rgba(255,255,255,.04)}
+    .lang-flag{font-size:1.5rem}
+    .lang-name{font-size:.85rem;font-weight:400;color:rgba(255,255,255,.9)}
+    .lang-level{font-size:.7rem;font-weight:300;color:var(--dim2);margin-top:.2rem}
+
+    footer{padding:2rem 6%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;color:var(--dim2);font-size:.65rem;font-weight:300;letter-spacing:1.5px}
+    .foot-r a{color:var(--dim2);text-decoration:none;margin-left:2rem;transition:color .3s;text-transform:uppercase;letter-spacing:1.5px}
+    .foot-r a:hover{color:var(--white)}
+
+    @media(max-width:900px){
+      nav ul{display:none}
+      .skill-cats,.domain-grid,.cert-grid,.lang-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="portfolio_3d.html" class="logo">WANGYUBIN</a>
+  <ul>
+    <li><a href="portfolio_3d.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-label">Skills & Expertise</div>
+  <h1 class="ph-title">My<br><span class="hl">Skills</span></h1>
+</div>
+
+<!-- TECH STACK -->
+<section class="sec dark">
+  <div class="sec-label">Tech Stack</div>
+  <h2 class="sec-title">기술 스택 &amp; <span class="hl">직무 역량</span></h2>
+  <div class="skill-cats">
+    <div>
+      <div class="s-group">
+        <div class="s-group-title">AI & Productivity</div>
+        <div class="chip-grid">
+          <span class="chip hi">Claude / AI 프롬프트</span>
+          <span class="chip hi">Prompt Engineering</span>
+          <span class="chip hi">Claude Code</span>
+          <span class="chip">ChatGPT</span>
+          <span class="chip">Notion AI</span>
+        </div>
+      </div>
+      <div class="s-group">
+        <div class="s-group-title">Development</div>
+        <div class="chip-grid">
+          <span class="chip">Next.js</span>
+          <span class="chip">Supabase</span>
+          <span class="chip">토스 미니앱 SDK</span>
+          <span class="chip">HTML / CSS</span>
+          <span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="s-group">
+        <div class="s-group-title">Data & Analytics</div>
+        <div class="chip-grid">
+          <span class="chip hi">데이터 분석 (BI)</span>
+          <span class="chip hi">Excel / Sheets</span>
+          <span class="chip">SQL 기초</span>
+          <span class="chip">Looker Studio</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="s-group">
+        <div class="s-group-title">Sales & Business</div>
+        <div class="chip-grid">
+          <span class="chip sec">아웃바운드 콜 세일즈</span>
+          <span class="chip sec">B2B 영업 / 파이프라인 관리</span>
+          <span class="chip sec">세일즈 스크립트 설계·검증</span>
+          <span class="chip sec">고객 니즈 발굴 / 컨설팅</span>
+          <span class="chip sec">업셀 / 크로스셀 전략</span>
+          <span class="chip sec">목표 추적 / 실적 관리</span>
+          <span class="chip sec">데이터 기반 의사결정</span>
+        </div>
+      </div>
+      <div class="s-group">
+        <div class="s-group-title">Tools & Workspace</div>
+        <div class="chip-grid">
+          <span class="chip">Google Workspace</span>
+          <span class="chip">MS Office</span>
+          <span class="chip">Notion</span>
+          <span class="chip">Slack</span>
+          <span class="chip">Figma 기초</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAIN -->
+<section class="sec">
+  <div class="sec-label">Domain</div>
+  <h2 class="sec-title">전문 <span class="hl">도메인</span></h2>
+  <div class="domain-grid">
+    <div class="d-card">
+      <div class="d-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.07 9.8 19.79 19.79 0 011.18 2 2 2 0 013 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div class="d-title">아웃바운드 콜 세일즈</div>
+      <div class="d-desc">하나투어 83개 대리점 전화·대면 영업 직접 수행. 고객 니즈 발굴부터 솔루션 제안, 클로징까지. Q1 103%·Q2 +282% 실적 달성.</div>
+      <div class="d-tags"><span class="dtag">콜 세일즈</span><span class="dtag">B2B 영업</span><span class="dtag">목표 달성</span></div>
+    </div>
+    <div class="d-card">
+      <div class="d-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="d-title">세일즈 스크립트 설계</div>
+      <div class="d-desc">고객 유형별 스크립트 설계 → 현장 검증 → 수치 측정 → 재설계. 인사동 아트샵에서 일 매출 150만 → 260만원 달성.</div>
+      <div class="d-tags"><span class="dtag">스크립트 설계</span><span class="dtag">현장 검증</span><span class="dtag">성과 측정</span></div>
+    </div>
+    <div class="d-card">
+      <div class="d-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="d-title">AI 제품 활용·개발</div>
+      <div class="d-desc">Claude Code로 업무 자동화 시스템 직접 개발. AI가 실무를 어떻게 바꾸는지 체감하고, 고객에게 ALF 가치를 구체적으로 설명 가능.</div>
+      <div class="d-tags"><span class="dtag">Claude Code</span><span class="dtag">AI 자동화</span><span class="dtag">제품 이해</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="sec dark">
+  <div class="sec-label">Languages</div>
+  <h2 class="sec-title">언어 <span class="hl">역량</span></h2>
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-flag">🇰🇷</div>
+      <div><div class="lang-name">한국어</div><div class="lang-level">Native · 모국어</div></div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇫🇷</div>
+      <div><div class="lang-name">French</div><div class="lang-level">DELF B2 · 업무 활용 가능</div></div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇺🇸</div>
+      <div><div class="lang-name">English</div><div class="lang-level">OPIc IH · 비즈니스 의사소통</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section class="sec">
+  <div class="sec-label">Certifications</div>
+  <h2 class="sec-title">자격 <span class="hl">사항</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-name">국외여행자인솔자</div>
+      <div class="cert-sub">TC 자격증</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">DELF B2</div>
+      <div class="cert-sub">프랑스어 공인 자격</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">OPIc IH</div>
+      <div class="cert-sub">영어 말하기 공인 자격</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">운전면허 2종보통</div>
+      <div class="cert-sub">취득</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 WANGYUBIN · Be Better with AI</span>
+  <div class="foot-r">
+    <a href="portfolio_3d.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+</body>
+</html>

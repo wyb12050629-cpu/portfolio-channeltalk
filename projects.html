@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — WANGYUBIN</title>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    :root {
+      --bg:#050505; --bg2:#080808;
+      --accent:#6D32FF; --electric:#00CCFF;
+      --white:#fff; --dim:#555; --dim2:#888;
+      --border:rgba(255,255,255,.06); --card:rgba(255,255,255,.02);
+      --font:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      --grad:linear-gradient(45deg,var(--accent),var(--electric));
+    }
+    *{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-weight:300}
+
+    nav{position:fixed;top:0;width:100%;height:60px;padding:0 6%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(5,5,5,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .logo{font-weight:200;font-size:.85rem;letter-spacing:6px;color:rgba(255,255,255,.9);text-decoration:none;text-transform:uppercase}
+    nav ul{display:flex;list-style:none;gap:2.5rem}
+    nav ul li a{text-decoration:none;color:var(--dim2);font-size:.7rem;font-weight:300;text-transform:uppercase;letter-spacing:2.5px;transition:color .3s}
+    nav ul li a:hover,nav ul li a.active{color:var(--white)}
+
+    .page-hero{padding:160px 6% 80px;border-bottom:1px solid var(--border)}
+    .ph-label{font-size:.6rem;font-weight:300;color:var(--dim2);text-transform:uppercase;letter-spacing:4px;margin-bottom:1.2rem}
+    .ph-title{font-size:clamp(2rem,5vw,4rem);font-weight:200;line-height:1.1;letter-spacing:-1px}
+    .ph-title .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .ph-sub{margin-top:1.8rem;font-size:.85rem;font-weight:300;color:var(--dim2);max-width:480px;line-height:1.9}
+
+    .sec{padding:80px 6%}
+
+    /* FILTER */
+    .filter-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+    .filter-btn{padding:.3rem .9rem;border:1px solid var(--border);font-size:.65rem;font-weight:300;color:var(--dim2);background:none;cursor:pointer;transition:all .3s;letter-spacing:1.5px;text-transform:uppercase}
+    .filter-btn:hover,.filter-btn.on{border-color:rgba(109,50,255,.4);color:var(--white);background:rgba(109,50,255,.08)}
+
+    /* PROJECT CARDS */
+    .proj-list{display:flex;flex-direction:column;gap:1px;border:1px solid var(--border)}
+
+    .p-card{background:var(--card);padding:3rem 2.5rem;display:grid;grid-template-columns:1fr 200px;gap:4rem;align-items:start;transition:background .3s;position:relative}
+    .p-card:hover{background:rgba(255,255,255,.03)}
+
+    .p-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;flex-wrap:wrap}
+    .p-num{font-size:.6rem;font-weight:300;color:var(--dim2);letter-spacing:2px;text-transform:uppercase}
+    .ptag{font-size:.62rem;font-weight:300;padding:2px 8px;border:1px solid var(--border);color:var(--dim2)}
+    .ptag.hi{border-color:rgba(109,50,255,.2);color:rgba(149,100,255,.8)}
+    .p-title{font-size:1.2rem;font-weight:400;margin-bottom:.8rem;line-height:1.3;color:rgba(255,255,255,.95)}
+    .p-desc{font-size:.82rem;font-weight:300;color:var(--dim2);line-height:1.9;margin-bottom:1.8rem;max-width:600px}
+
+    .p-features{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 2rem;margin-bottom:2rem}
+    .p-feat{font-size:.75rem;font-weight:300;color:var(--dim2);padding-left:.8rem;position:relative;line-height:1.6}
+    .p-feat::before{content:'—';position:absolute;left:0;color:rgba(109,50,255,.5);font-size:.6rem}
+
+    .p-link{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border:1px solid var(--border);font-size:.65rem;font-weight:300;color:var(--dim2);text-decoration:none;transition:all .3s;letter-spacing:1px;text-transform:uppercase}
+    .p-link:hover{border-color:rgba(255,255,255,.2);color:var(--white)}
+    .p-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5}
+    .p-link.disabled{opacity:.3;pointer-events:none}
+
+    .p-right{display:flex;flex-direction:column;gap:1px;border:1px solid var(--border)}
+    .metric{text-align:center;padding:1.5rem 1rem;background:rgba(255,255,255,.02);border:none}
+    .metric-n{font-size:1.4rem;font-weight:200;letter-spacing:-1px;color:var(--white)}
+    .metric-l{font-size:.6rem;font-weight:300;color:var(--dim2);margin-top:.4rem;letter-spacing:1.5px;text-transform:uppercase}
+
+    footer{padding:2rem 6%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;color:var(--dim2);font-size:.65rem;font-weight:300;letter-spacing:1.5px}
+    .foot-r a{color:var(--dim2);text-decoration:none;margin-left:2rem;transition:color .3s;text-transform:uppercase;letter-spacing:1.5px}
+    .foot-r a:hover{color:var(--white)}
+
+    @media(max-width:900px){
+      nav ul{display:none}
+      .proj-list{border:none}
+      .p-card{grid-template-columns:1fr;border:1px solid var(--border);margin-bottom:1px}
+      .p-right{flex-direction:row}
+      .p-features{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="portfolio_3d.html" class="logo">WANGYUBIN</a>
+  <ul>
+    <li><a href="portfolio_3d.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-label">03 · Projects</div>
+  <h1 class="ph-title">직접 만들고,<br><span class="hl">성과로 증명</span>했습니다</h1>
+  <p class="ph-sub">AI 대시보드부터 토스 미니앱까지 기획·개발·출시 전 과정을 직접 수행한 프로젝트들입니다.</p>
+</div>
+
+<section class="sec">
+  <div class="filter-row">
+    <button class="filter-btn on">All</button>
+    <button class="filter-btn">AI</button>
+    <button class="filter-btn">CX</button>
+    <button class="filter-btn">Toss</button>
+    <button class="filter-btn">Web App</button>
+  </div>
+
+  <div class="proj-list">
+
+    <!-- 1 -->
+    <div class="p-card feat">
+      <div class="p-left">
+        <div class="p-meta">
+          <span class="p-num">01</span>
+          <span class="ptag hi">AI Dashboard</span>
+          <span class="ptag">Next.js</span>
+          <span class="ptag">Supabase</span>
+          <span class="ptag">Claude Code</span>
+        </div>
+        <div class="p-title">HANA-IMS 대시보드</div>
+        <div class="p-desc">하나투어 예약 관리의 비효율적인 프로세스를 발견하고 Claude Code로 처음부터 설계·구축한 내부 운영 툴. 파트너사 83곳 정산을 4시간에서 20분으로 단축했습니다. 전사 AI 활용 우수사례로 선정되어 전 영업사원을 대상으로 교육을 진행했습니다.</div>
+        <div class="p-features">
+          <div class="p-feat">주간 보고 자동 집계 (리소스 97% 절감)</div>
+          <div class="p-feat">이중 단가 자동 관리</div>
+          <div class="p-feat">인센티브 정산 자동화 (4시간→20분)</div>
+          <div class="p-feat">분기별 실적 조회</div>
+        </div>
+        <a href="#" class="p-link disabled">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          내부 툴 (비공개)
+        </a>
+      </div>
+      <div class="p-right">
+        <div class="metric"><div class="metric-n">97%</div><div class="metric-l">리소스 절감</div></div>
+        <div class="metric"><div class="metric-n">4h→20m</div><div class="metric-l">정산 자동화</div></div>
+        <div class="metric"><div class="metric-n">전사</div><div class="metric-l">AI 우수사례</div></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="p-card">
+      <div class="p-left">
+        <div class="p-meta">
+          <span class="p-num">02</span>
+          <span class="ptag hi">토스 미니앱</span>
+          <span class="ptag">소셜 인기 28위</span>
+          <span class="ptag">Toss</span>
+        </div>
+        <div class="p-title">우리사이</div>
+        <div class="p-desc">두 사람만을 위한 일정 공유 캘린더. 기획부터 개발, 심사, 출시까지 전 과정을 직접 수행. 토스 소셜 인기 28위를 달성했습니다. 커플을 위한 일정 공유, 디데이 카운트, 기록 기능을 제공합니다.</div>
+        <div class="p-features">
+          <div class="p-feat">커플 일정 공유 캘린더</div>
+          <div class="p-feat">디데이 카운트</div>
+          <div class="p-feat">기획·개발·심사·출시 전 과정</div>
+          <div class="p-feat">토스 소셜 인기 28위</div>
+        </div>
+        <a href="https://couple-calendar-five.vercel.app/" target="_blank" rel="noopener" class="p-link">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          서비스 보기
+        </a>
+      </div>
+      <div class="p-right">
+        <div class="metric"><div class="metric-n">28위</div><div class="metric-l">토스 소셜 순위</div></div>
+        <div class="metric"><div class="metric-n">Full</div><div class="metric-l">기획→출시</div></div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="p-card">
+      <div class="p-left">
+        <div class="p-meta">
+          <span class="p-num">03</span>
+          <span class="ptag hi">UX 개선</span>
+          <span class="ptag">데이터 분석</span>
+          <span class="ptag">직접 구현</span>
+        </div>
+        <div class="p-title">StayKorea 웹사이트 개선</div>
+        <div class="p-desc">CS 데이터 분석을 통해 외국인 고객이 숙소 탐색 단계에서 대량 이탈하는 패턴을 발견했습니다. 한국 지리에 익숙하지 않은 외국인을 위해 대학교·랜드마크 이름 기준으로 근처 숙소를 바로 볼 수 있는 필터링 시스템을 설계하고 직접 구현해 실제 서비스에 반영했습니다.</div>
+        <div class="p-features">
+          <div class="p-feat">CS 데이터 기반 이탈 패턴 발견</div>
+          <div class="p-feat">랜드마크 기반 필터링 시스템 설계</div>
+          <div class="p-feat">직접 구현하여 실제 서비스 반영</div>
+          <div class="p-feat">고객 문의 전환율 +25%</div>
+        </div>
+        <a href="https://staykorea.org/" target="_blank" rel="noopener" class="p-link">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          서비스 보기
+        </a>
+      </div>
+      <div class="p-right">
+        <div class="metric"><div class="metric-n">+25%</div><div class="metric-l">고객 문의 전환율</div></div>
+        <div class="metric"><div class="metric-n">Data</div><div class="metric-l">발견 → 구현</div></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="p-card">
+      <div class="p-left">
+        <div class="p-meta">
+          <span class="p-num">04</span>
+          <span class="ptag hi">Web App</span>
+          <span class="ptag">퀴즈</span>
+          <span class="ptag">직장인</span>
+        </div>
+        <div class="p-title">직장인 상식 퀴즈</div>
+        <div class="p-desc">직장인이 알아야 할 비즈니스·사회 상식을 퀴즈로 배우는 웹앱. 기획·개발·배포 전 과정을 직접 수행했습니다. 재미있게 풀면서 실질적인 직장 지식을 쌓을 수 있도록 설계했습니다.</div>
+        <div class="p-features">
+          <div class="p-feat">직장인 필수 비즈니스 상식 콘텐츠</div>
+          <div class="p-feat">퀴즈 형식의 인터랙티브 학습</div>
+          <div class="p-feat">기획·개발·배포 전 과정 직접 수행</div>
+          <div class="p-feat">웹 서비스 독립 배포 완료</div>
+        </div>
+        <a href="https://business-quiz-alpha.vercel.app/" target="_blank" rel="noopener" class="p-link">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          서비스 보기
+        </a>
+      </div>
+      <div class="p-right">
+        <div class="metric"><div class="metric-n">Full</div><div class="metric-l">기획→배포</div></div>
+        <div class="metric"><div class="metric-n">Web</div><div class="metric-l">독립 배포 완료</div></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="p-card">
+      <div class="p-left">
+        <div class="p-meta">
+          <span class="p-num">05</span>
+          <span class="ptag hi">Web App</span>
+          <span class="ptag">사내 공식 등록</span>
+        </div>
+        <div class="p-title">오늘 뭐 먹지?</div>
+        <div class="p-desc">점심 메뉴 추천 웹앱. 인사팀 요청으로 사내 인트라넷에 공식 등록. 팀원들의 반복되는 고민을 서비스로 해결했습니다. 종각역 인근 식당 랜덤 추천 및 투표 공유 기능을 제공합니다.</div>
+        <div class="p-features">
+          <div class="p-feat">종각역 인근 식당 랜덤 추천</div>
+          <div class="p-feat">팀 투표 공유 기능</div>
+          <div class="p-feat">인사팀 요청으로 사내 인트라넷 등록</div>
+          <div class="p-feat">실 사용자 문제 해결</div>
+        </div>
+        <a href="https://lunch-roulette-246tvolgr-wyb12050629-cpus-projects.vercel.app/" target="_blank" rel="noopener" class="p-link">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          서비스 보기
+        </a>
+      </div>
+      <div class="p-right">
+        <div class="metric"><div class="metric-n">사내</div><div class="metric-l">인트라넷 공식 등록</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 WANGYUBIN · Be Better with AI</span>
+  <div class="foot-r">
+    <a href="portfolio_3d.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Filter buttons (visual only — full implementation would filter .p-card)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>
